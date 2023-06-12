@@ -48,7 +48,7 @@ class OnvifGetCurrentPresetImagingCommand extends OnvifHelperCommand {
           await imaging.getCurrentPreset(argResults!['video-source-token']);
 
       print(preset);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -88,7 +88,7 @@ class OnvifGetPresetsImagingCommand extends OnvifHelperCommand {
       );
 
       print(presets);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -111,7 +111,7 @@ class OnvifGetServiceCapabilitiesImagingCommand extends OnvifHelperCommand {
       final capabilities = await imaging.getServiceCapabilities();
 
       print(capabilities);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -146,7 +146,7 @@ class OnvifGetStatusImagingCommand extends OnvifHelperCommand {
           await imaging.getStatus(argResults!['video-source-token']);
 
       print(imagingStatus);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
