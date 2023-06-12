@@ -26,6 +26,8 @@ class Transport with UiLoggy {
     Response? response;
 
     try {
+      loggy.info('Request URI: ${uri.toString()}');
+      loggy.info('Xml: ${requestData.toString()}');
       response = await dio.post(uri.toString(),
           data: requestData.toString(),
           options: Options(headers: {
