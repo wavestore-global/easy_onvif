@@ -120,6 +120,34 @@ class DeviceManagementRequest {
     return Transport.builder.buildFragment();
   }
 
+  /// XML for the [setSystemDateAndTime]
+  static XmlDocumentFragment setSystemDateAndTime() {
+    Transport.builder.element('SetSystemDateAndTime', nest: () {
+      Transport.builder.namespace(Xmlns.tds);
+
+      Transport.builder.element('DateTimeType', nest: () {
+        Transport.builder.namespace(Xmlns.tds);
+
+        Transport.builder.text('NTP');
+      });
+
+      Transport.builder.element('DaylightSavings', nest: () {
+        Transport.builder.namespace(Xmlns.tds);
+
+        Transport.builder.text('false');
+      });
+
+      Transport.builder.element('TimeZone', nest: () {
+        Transport.builder.namespace(Xmlns.tds);
+
+        // Transport.builder.text('EST5EDT,M3.2.0/2:00:00,M11.1.0/2:00:00');
+        Transport.builder.text('HST11HDT,M3.2.0/2:00:00,M11.1.0/2:00:00');
+      });
+    });
+
+    return Transport.builder.buildFragment();
+  }
+
   /// XML for the [deviceInformation]
   static XmlDocumentFragment deviceInformation() =>
       Transport.quickTag('GetDeviceInformation', Xmlns.tds);

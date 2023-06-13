@@ -306,6 +306,23 @@ class DeviceManagement with UiLoggy {
     return GetSystemLogResponse.fromJson(envelope.body.response!).systemLog;
   }
 
+  // This operation is crazy
+  Future<bool> setSystemDateAndTime() async {
+    loggy.debug('setSystemDateAndTime');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport.securedEnvelope(
+            soap.DeviceManagementRequest.setSystemDateAndTime()));
+
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
+    loggy.error(
+        'Got response for setSystemDateAndTime: ${envelope.body.response?.toString()}');
+    return true;
+  }
+
   Future<SystemInformation> getSystemSupportInformation() async {
     loggy.debug('getSystemSupportInformation');
 

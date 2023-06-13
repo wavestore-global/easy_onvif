@@ -547,6 +547,29 @@ class OnvifGetSystemLogDeviceManagementCommand extends OnvifHelperCommand {
   }
 }
 
+class OnvifSetSystemDateAndTimeDeviceManagementCommand
+    extends OnvifHelperCommand {
+  @override
+  String get description => 'Set the system date and time settings';
+
+  @override
+  String get name => 'set-system-date-and-time';
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final setSystemDandTResults =
+          await deviceManagement.setSystemDateAndTime();
+
+      print(setSystemDandTResults);
+    } on DioException catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
 /// This operation gets arbitrary device diagnostics information from the
 /// device.
 class OnvifGetSystemSupportInformationDeviceManagementCommand
